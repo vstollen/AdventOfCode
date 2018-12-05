@@ -8,13 +8,28 @@ fun main(args : Array<String>) {
 
     var frequency = 0
 
-    input.forEachLine { line ->
-        if (line[0] == '+') {
-            frequency += line.filter { it != '+' }.toInt()
-        } else {
-            frequency -= line.filter { it != '-' }.toInt()
+    val reachedFrequencys = HashSet<Int>()
+
+    reachedFrequencys.add(frequency)
+
+    var reachedFrequencyTwice = false
+
+    while (!reachedFrequencyTwice) {
+        input.forEachLine { line ->
+
+            if (reachedFrequencyTwice) return@forEachLine
+
+            if (line[0] == '+') {
+                frequency += line.filter { it != '+' }.toInt()
+            } else {
+                frequency -= line.filter { it != '-' }.toInt()
+            }
+
+            if (!reachedFrequencys.add(frequency)) {
+                System.out.println(frequency)
+                reachedFrequencyTwice = true
+                return@forEachLine
+            }
         }
     }
-
-    System.out.println(frequency)
 }
