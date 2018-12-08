@@ -4,22 +4,40 @@ import java.io.File
 
 fun main(args : Array<String>) {
 
+    class ClothClaim(claim: String) {
+        val id = claim.substringAfter('#').substringBefore(" @").toInt()
+
+        val sideDistance = claim.substringAfter("@ ").substringBefore(',').toInt()
+        val topDistance = claim.substringAfter(',').substringBefore(':').toInt()
+
+        val width = claim.substringAfter(": ").substringBefore('x').toInt()
+        val height = claim.substringAfter('x').toInt()
+
+        var overlapping = false
+    }
+
     val input = File("input/day3_fabric.txt")
+    val inputLines = input.readLines()
 
     val cloth = Array(1000) {IntArray(1000) {0} }
+    val claims = ArrayList<ClothClaim>()
 
     // Measure cloth claims
-    input.forEachLine {
+    for (i in 0 until inputLines.size) {
 
-        val sideDistance = it.substringAfter("@ ").substringBefore(',').toInt()
-        val topDistance = it.substringAfter(',').substringBefore(':').toInt()
+        claims.add(i, ClothClaim(inputLines[i]))
 
-        val width = it.substringAfter(": ").substringBefore('x').toInt()
-        val height = it.substringAfter('x').toInt()
-
-        for (x in sideDistance until sideDistance + width) {
-            for (y in topDistance until topDistance + height) {
+        for (x in claims[i].sideDistance until claims[i].sideDistance + claims[i].width) {
+            for (y in claims[i].topDistance until claims[i].topDistance + claims[i].height) {
                 cloth[x][y]++
+            }
+        }
+    }
+
+    for (i in 0 until claims.size) {
+        for (x in claims[i].sideDistance until claims[i].sideDistance + claims[i].width) {
+            for (y in claims[i].topDistance until claims[i].topDistance + claims[i].height) {
+                if (cloth[x][y] > 1) claims[i].overlapping = true
             }
         }
     }
@@ -34,4 +52,5 @@ fun main(args : Array<String>) {
 
     System.out.println(multiClaims)
 
+    claims.forEach { if (!it.overlapping) System.out.println(it.id)}
 }
