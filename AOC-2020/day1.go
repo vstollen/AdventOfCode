@@ -27,7 +27,7 @@ func twoNumbers(data []int) {
 				solution := elem1 * elem2
 
 				fmt.Printf("%v + %v = 2020\n", elem1, elem2)
-				fmt.Printf("Solution: %v * %v = %v", elem1, elem2, solution)
+				fmt.Printf("Solution: %v * %v = %v\n", elem1, elem2, solution)
 				return
 			}
 		}
