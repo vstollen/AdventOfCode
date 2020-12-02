@@ -16,14 +16,19 @@ func CountValidPasswords() {
 	stringData := ReadData("day_2.txt")
 	data := parsePasswords(stringData)
 
-	validPasswords := 0
+	validPasswordsOld := 0
+	validPasswordsNew := 0
 	for _, elem := range data {
 		if elem.oldIsValid() {
-			validPasswords++
+			validPasswordsOld++
+		}
+		if elem.newIsValid() {
+			validPasswordsNew++
 		}
 	}
 
-	fmt.Printf("There are %v valid passwords.", validPasswords)
+	fmt.Printf("There are %v valid passwords according to the old policy.\n", validPasswordsOld)
+	fmt.Printf("There are %v valid passwords according to the new policy.\n", validPasswordsNew)
 }
 
 // Checker for the old password policy
@@ -45,6 +50,13 @@ func (p password) oldIsValid() bool {
 	}
 
 	return true
+}
+
+func (p password) newIsValid() bool {
+	firstEqualsLetter := rune(p.password[p.pos1-1]) == p.letter
+	secondEqualsLetter := rune(p.password[p.pos2-1]) == p.letter
+
+	return firstEqualsLetter != secondEqualsLetter
 }
 
 func parsePasswords(data []string) []password {
