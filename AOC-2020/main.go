@@ -6,7 +6,7 @@ import (
 
 func main() {
 	fmt.Println("Welcome to AdventOfCode 2020!\n" +
-		"Please select a day (1):")
+		"Please select a day (1-2):")
 
 	var day int
 
@@ -16,5 +16,7 @@ func main() {
 	switch day {
 	case 1:
 		ExpenseReport()
+	case 2:
+		CountValidPasswords()
 	}
 }

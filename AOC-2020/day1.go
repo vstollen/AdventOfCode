@@ -1,15 +1,13 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
-	"log"
-	"os"
 	"strconv"
 )
 
 func ExpenseReport() {
-	data := readData()
+	stringData := ReadData("day_1.txt")
+	data := arrayAtoi(stringData)
 
 	twoNumbers(data)
 	threeNumbers(data)
@@ -65,22 +63,12 @@ func threeNumbers(data []int) {
 	}
 }
 
-func readData() []int {
+func arrayAtoi(data []string) []int  {
+	var convertedData = make([]int, len(data))
 
-	file, err := os.Open("input/day_1.txt")
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer file.Close()
-
-	var data []int
-
-	scanner := bufio.NewScanner(file)
-	for scanner.Scan() {
-		number, _ := strconv.Atoi(scanner.Text())
-		
-		data = append(data, number)
+	for i, _ := range data {
+		convertedData[i], _ = strconv.Atoi(data[i])
 	}
 
-	return data
+	return convertedData
 }
