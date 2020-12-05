@@ -48,7 +48,7 @@ func (p passport) requiredFieldsPresent() bool {
 
 func (p passport) fieldsValid() bool {
 	byr, _ := strconv.Atoi(p["byr"])
-	if !(1920 <= byr && byr<= 2002) {
+	if !(1920 <= byr && byr <= 2002) {
 		return false
 	}
 

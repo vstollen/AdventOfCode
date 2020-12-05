@@ -21,7 +21,7 @@ func twoNumbers(data []int) {
 				continue
 			}
 
-			if elem1 + elem2 == 2020 {
+			if elem1+elem2 == 2020 {
 				solution := elem1 * elem2
 
 				fmt.Printf("%v + %v = 2020\n", elem1, elem2)
@@ -41,7 +41,7 @@ func threeNumbers(data []int) {
 				continue
 			}
 
-			if elem1 + elem2 >= 2020 {
+			if elem1+elem2 >= 2020 {
 				continue
 			}
 
@@ -50,7 +50,7 @@ func threeNumbers(data []int) {
 					continue
 				}
 
-				if elem1 + elem2 + elem3 == 2020 {
+				if elem1+elem2+elem3 == 2020 {
 					solution := elem1 * elem2 * elem3
 
 					fmt.Printf("%v + %v + %v = 2020\n", elem1, elem2, elem3)
@@ -63,7 +63,7 @@ func threeNumbers(data []int) {
 	}
 }
 
-func arrayAtoi(data []string) []int  {
+func arrayAtoi(data []string) []int {
 	var convertedData = make([]int, len(data))
 
 	for i, _ := range data {

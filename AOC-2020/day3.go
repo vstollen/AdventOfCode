@@ -36,7 +36,7 @@ func countTreesWithSlope(data treeMap, right, down int) int {
 }
 
 func (m treeMap) get(i, j int) bool {
-	return m.mapData[i][j % len(m.mapData[i])]
+	return m.mapData[i][j%len(m.mapData[i])]
 }
 
 func parseData(input []string) treeMap {
