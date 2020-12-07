@@ -2,11 +2,13 @@ package main
 
 import (
 	"fmt"
+	"strconv"
 	"strings"
 )
 
 type bag struct {
 	name string
+	contains map[*bag]int
 	heldBy map[string]*bag
 }
 
@@ -23,7 +25,13 @@ func CountOuterBagColors() {
 		fmt.Printf("%v\n", name.name)
 	}
 
-	fmt.Printf("Total: %v", len(outerBags))
+	fmt.Printf("Total: %v\n", len(outerBags))
+
+	bagsInside := bagsNeededWithBag(bagRules["shiny gold"], bagRules)
+	// Subtract the shiny gold bag to get the number of bags inside
+	bagsInside--
+
+	fmt.Printf("Bags needed inside Shiny Gold: %v", bagsInside)
 }
 
 func appendOuterParents(innerBag *bag, outerBags map[*bag]bool) map[*bag]bool {
@@ -34,6 +42,15 @@ func appendOuterParents(innerBag *bag, outerBags map[*bag]bool) map[*bag]bool {
 	}
 
 	return outerBags
+}
+
+func bagsNeededWithBag(outerBag *bag, rules map[string]*bag) int {
+	sum := 1
+	for innerBag, count := range outerBag.contains {
+		sum += count * bagsNeededWithBag(innerBag, rules)
+	}
+
+	return sum
 }
 
 func (b bag) String() string {
@@ -49,6 +66,7 @@ func parseBagRules(data []string) map[string]*bag {
 		if !ok {
 			bags[bagName] = &bag{name: bagName}
 			bags[bagName].heldBy = make(map[string]*bag)
+			bags[bagName].contains = make(map[*bag]int)
 		}
 		outerBag = bags[bagName]
 
@@ -60,19 +78,20 @@ func parseBagRules(data []string) map[string]*bag {
 			rule = strings.TrimSuffix(rule, " bag")
 			rule = strings.TrimSuffix(rule, " bags")
 
-			_, name := splitAtFirst(rule, " ")
+			count, name := splitAtFirst(rule, " ")
 
 			bagPointer, ok := bags[name]
 			if !ok {
 				bags[name] = &bag{
 					name:   name,
-					heldBy: map[string]*bag{},
 				}
 				bagPointer = bags[name]
 				bagPointer.heldBy = make(map[string]*bag)
+				bagPointer.contains = make(map[*bag]int)
 			}
 
 			bagPointer.heldBy[outerBag.name] = outerBag
+			outerBag.contains[bagPointer], _ = strconv.Atoi(count)
 		}
 
 	}
