@@ -6,7 +6,7 @@ import (
 
 func main() {
 	fmt.Println("Welcome to AdventOfCode 2020!\n" +
-		"Please select a day (1-6):")
+		"Please select a day (1-7):")
 
 	var day int
 
@@ -25,5 +25,7 @@ func main() {
 		FindHighestSeatId()
 	case 6:
 		CountYesAnsweredQuestions()
+	case 7:
+		CountOuterBagColors()
 	}
 }

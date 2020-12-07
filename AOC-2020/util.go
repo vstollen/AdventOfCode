@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"log"
 	"os"
+	"strings"
 )
 
 func ReadData(fileName string) []string {
@@ -22,4 +23,10 @@ func ReadData(fileName string) []string {
 	}
 
 	return data
+}
+
+func splitAtFirst(s string, sep string) (string, string) {
+	parts := strings.SplitN(s, sep, 2)
+
+	return parts[0], parts[1]
 }
