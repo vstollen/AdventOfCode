@@ -13,7 +13,7 @@ const (
 )
 
 type operation struct {
-	op int
+	op  int
 	val int
 }
 
@@ -53,7 +53,7 @@ func RunHandheldCode() {
 	fmt.Printf("Accumulator after fix: %v\n", accFixed)
 }
 
-func runProgram(program []operation) (int, error){
+func runProgram(program []operation) (int, error) {
 	visitedLines := make([]bool, len(program))
 
 	accumulator := 0
@@ -93,7 +93,7 @@ func parseProgram(data []string) []operation {
 
 func parseOperation(operationString string) operation {
 	opcode, valueString := splitAtFirst(operationString, " ")
-	
+
 	op := operation{}
 
 	switch opcode {

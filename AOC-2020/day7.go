@@ -7,9 +7,9 @@ import (
 )
 
 type bag struct {
-	name string
+	name     string
 	contains map[*bag]int
-	heldBy map[string]*bag
+	heldBy   map[string]*bag
 }
 
 func CountOuterBagColors() {
@@ -83,7 +83,7 @@ func parseBagRules(data []string) map[string]*bag {
 			bagPointer, ok := bags[name]
 			if !ok {
 				bags[name] = &bag{
-					name:   name,
+					name: name,
 				}
 				bagPointer = bags[name]
 				bagPointer.heldBy = make(map[string]*bag)
