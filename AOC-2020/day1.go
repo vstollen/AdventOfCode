@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"strconv"
 )
 
 func ExpenseReport() {
@@ -61,14 +60,4 @@ func threeNumbers(data []int) {
 
 		}
 	}
-}
-
-func arrayAtoi(data []string) []int {
-	var convertedData = make([]int, len(data))
-
-	for i, _ := range data {
-		convertedData[i], _ = strconv.Atoi(data[i])
-	}
-
-	return convertedData
 }

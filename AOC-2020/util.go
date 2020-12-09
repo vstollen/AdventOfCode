@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"log"
 	"os"
+	"strconv"
 	"strings"
 )
 
@@ -23,6 +24,17 @@ func ReadData(fileName string) []string {
 	}
 
 	return data
+}
+
+// arrayAtoi converts an array of strings into an array of int.
+func arrayAtoi(data []string) []int {
+	var convertedData = make([]int, len(data))
+
+	for i, _ := range data {
+		convertedData[i], _ = strconv.Atoi(data[i])
+	}
+
+	return convertedData
 }
 
 func splitAtFirst(s string, sep string) (string, string) {
