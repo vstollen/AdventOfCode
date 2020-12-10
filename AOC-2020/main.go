@@ -6,7 +6,7 @@ import (
 
 func main() {
 	fmt.Println("Welcome to AdventOfCode 2020!\n" +
-		"Please select a day (1-9):")
+		"Please select a day (1-10):")
 
 	var day int
 
@@ -31,5 +31,7 @@ func main() {
 		RunHandheldCode()
 	case 9:
 		XMASCypher()
+	case 10:
+		Joltages()
 	}
 }
