@@ -1,18 +1,14 @@
 # Open file: AOC-2021/day1.txt
-with open('day1.txt') as f:
+with open('AOC-2021/day1.txt') as f:
     data = f.read().splitlines()
-    data = map(int, data)
+    data = list(map(int, data))
 
-    last_n = None
     increases = 0
-    for n in data:
-        if not last_n:
-            last_n = n
-            continue
+    for i in range(3, len(data)):
+        last_sum = sum(data[i-3:i])
+        current_sum = sum(data[i-2:i+1])
 
-        if n > last_n:
+        if current_sum > last_sum:
             increases += 1
-
-        last_n = n
     
     print(increases)
